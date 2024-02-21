@@ -39,7 +39,12 @@ namespace XboxWheelCompatibility.WheelTransformer
                 MainWheelChanged.Invoke(null, MainWheel);
             }
         }
-
+        public static bool IsFerrari458SpiderWheel(RacingWheel wheel)
+{
+    return wheel.HardwareProductId == 0xB671 &&
+           wheel.HardwareVendorId == 0x044F &&
+           wheel.HardwareInstanceId == "USB\\VID_044F&PID_B671\\00001382FE1E5F29";
+}
         private static void ListenForWheelChanges()
         {
             LifecycleManager.Tick += (object? Sender, EventArgs Event) =>
