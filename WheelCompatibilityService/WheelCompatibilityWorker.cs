@@ -11,9 +11,23 @@ namespace XboxWheelCompatibility.WheelCompatibilityService
         private readonly TcpHost TCPHost;
 
         public int GetMainWheelIndex()
+{
+    var racingWheels = WheelManager.ActiveWheels;
+
+    // Iterate through each racing wheel
+    for (int i = 0; i < racingWheels.Count; i++)
+    {
+        // Check if the racing wheel is the Ferrari 458 Spider wheel
+        if (WheelManager.IsFerrari458SpiderWheel(racingWheels[i]))
         {
-            return RacingWheel.RacingWheels.ToList().IndexOf(WheelManager.MainWheel);
+            // Found the Ferrari 458 Spider wheel, return its index
+            return i;
         }
+    }
+
+    // If the Ferrari 458 Spider wheel is not found, return -1 or handle accordingly
+    return -1;
+}
         public void Start()
         {
             WheelInputTransformer.Start();
